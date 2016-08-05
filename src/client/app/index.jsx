@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from './modules/chat/components/container';
 
 ReactDOM.render(
-    <h1>React Chat</h1>,
+    <Container/>,
     document.getElementById('app')
 );
