@@ -5,11 +5,11 @@ class Message extends React.Component {
         return (
             <div className="message">
                 <div className="details">
-                    <span className="author">Gaua</span>
-                    <span className="date">(04-08-2016 14:52)</span>
+                    <span className="author">{this.props.author}</span>
+                    <span className="date">{this.props.created_at}</span>
                 </div>
                 <div className="text">
-                    <p>Jest tam jakaś lura na pokestopie?</p>
+                    <p>{this.props.text}</p>
                 </div>
             </div>
         );

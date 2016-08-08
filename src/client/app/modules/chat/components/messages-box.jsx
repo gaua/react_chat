@@ -1,12 +1,30 @@
 import React from 'react';
 import Message from './message';
+import ReactDOM from 'react-dom';
 
 class MessagesBox extends React.Component {
-    render() {
-        return (
-            <div className="messages-box">
-                <Message/>
+    componentDidUpdate() {
+        var node = ReactDOM.findDOMNode(this);
+        node.scrollTop = node.scrollHeight;
+    }
 
+    render() {
+        var messages = [];
+
+        this.props.messages.forEach(function(message) {
+            messages.push(
+                <Message
+                    key={message.id}
+                    author={message.author}
+                    created_at={message.created_at}
+                    text={message.text}
+                />
+            );
+        });
+
+        return (
+            <div className="messages-box" id="message-box">
+                {messages}
             </div>
         );
     }
