@@ -37,9 +37,10 @@ class SendBox extends React.Component {
             return;
         }
 
-        this.props.onSendMessage(
-            {id: new Date().getTime(), author: 'Gaua', created_at: new Date().toLocaleString(), text: text}
-        );
+        var message = {id: new Date().getTime(), author: 'Gaua', created_at: new Date().toLocaleString(), text: text};
+
+        this.props.socket.emit('messageSend', message);
+
         this.setState({text: ''});
     }
 

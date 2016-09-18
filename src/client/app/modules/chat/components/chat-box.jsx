@@ -11,6 +11,7 @@ class ChatBox extends React.Component {
         };
 
         this.handleSendMessage = this.handleSendMessage.bind(this);
+        this.props.socket.on('messageSend', this.handleSendMessage);
     }
 
     handleSendMessage(message) {
@@ -25,7 +26,7 @@ class ChatBox extends React.Component {
         return (
             <div>
                 <MessagesBox messages={this.state.messages} />
-                <SendBox onSendMessage={this.handleSendMessage} />
+                <SendBox socket={this.props.socket} onSendMessage={this.handleSendMessage} />
             </div>
         );
     }

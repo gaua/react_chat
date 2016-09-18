@@ -7,7 +7,7 @@ class Container extends React.Component {
         return (
             <div className="container content">
                 <Header />
-                <ChatBox />
+                <ChatBox socket={this.props.socket}/>
             </div>
         );
     }
