@@ -1,8 +1,8 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var swig = require('swig');
-var io = require('socket.io')(http);
+let express = require('express');
+let app = express();
+let http = require('http').Server(app);
+let swig = require('swig');
+let io = require('socket.io')(http);
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
@@ -20,8 +20,16 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
+app.get('/register', function (req, res) {
+    res.render('register');
+});
+
 io.on('connection', function(socket){
     socket.on('messageSend', function(msg){
         io.emit('messageSend', msg);
     });
+
+    socket.on('userJoined', function (username) {
+        io.emit('userJoined', username);
+    })
 });

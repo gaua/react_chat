@@ -43,3 +43,19 @@
 
     padding-left: 10px;
 }
+
+.registration-box {
+    text-align: center;
+}
+
+.registration-box .input-group {
+    width: 400px;
+
+    margin: auto;
+
+    border: solid #337ab7;
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+    padding: 10px;
+}

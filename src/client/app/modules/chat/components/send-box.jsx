@@ -31,13 +31,18 @@ class SendBox extends React.Component {
     }
 
     sendMessage() {
-        var text = this.state.text.trim();
+        let text = this.state.text.trim();
 
         if (!text) {
             return;
         }
 
-        var message = {id: new Date().getTime(), author: 'Gaua', created_at: new Date().toLocaleString(), text: text};
+        let message = {
+            id: new Date().getTime(),
+            author: this.props.username,
+            created_at: new Date().toLocaleString(),
+            text: text
+        };
 
         this.props.socket.emit('messageSend', message);
 

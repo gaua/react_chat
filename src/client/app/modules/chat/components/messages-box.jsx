@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 
 class MessagesBox extends React.Component {
     componentDidUpdate() {
-        var node = ReactDOM.findDOMNode(this);
+        let node = ReactDOM.findDOMNode(this);
         node.scrollTop = node.scrollHeight;
     }
 
     render() {
-        var messages = [];
+        let messages = [];
 
         this.props.messages.forEach(function(message) {
             messages.push(
