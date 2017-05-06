@@ -31,7 +31,7 @@ class Header extends React.Component {
                         {leave}
                     </ul>
                 </nav>
-                <h3 className="text-muted">React Chat</h3>
+                <h3 className="text-muted">Chat</h3>
             </div>
         );
     }

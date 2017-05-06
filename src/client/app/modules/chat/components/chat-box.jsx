@@ -7,7 +7,7 @@ class ChatBox extends React.Component {
         super(props);
 
         this.state = {
-            messages: []
+            messages: JSON.parse(localStorage.getItem('messages')) || []
         };
 
         this.handleMessageSend = this.handleMessageSend.bind(this);
@@ -38,9 +38,7 @@ class ChatBox extends React.Component {
             text: username + ' joined to the chat.'
         };
 
-        if (localStorage.getItem('username') !== username) {
-            this.addMessage(message);
-        }
+        this.addMessage(message);
     }
 
     handleUserLeft(username) {
@@ -59,6 +57,8 @@ class ChatBox extends React.Component {
         let messages = this.state.messages;
 
         messages.push(message);
+
+        localStorage.setItem('messages', JSON.stringify(messages));
 
         this.setState({messages: messages});
     }

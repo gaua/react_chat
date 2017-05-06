@@ -4,6 +4,14 @@ import ReactDOM from 'react-dom';
 
 class MessagesBox extends React.Component {
     componentDidUpdate() {
+        this.scrollDown();
+    }
+
+    componentDidMount() {
+        this.scrollDown();
+    }
+
+    scrollDown() {
         let node = ReactDOM.findDOMNode(this);
         node.scrollTop = node.scrollHeight;
     }
