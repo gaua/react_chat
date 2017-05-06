@@ -10,14 +10,16 @@ class ChatBox extends React.Component {
             messages: []
         };
 
-        this.handleSendMessage = this.handleSendMessage.bind(this);
+        this.handleMessageSend = this.handleMessageSend.bind(this);
         this.handleUserJoined = this.handleUserJoined.bind(this);
+        this.handleUserLeft = this.handleUserLeft.bind(this);
 
-        this.props.socket.on('messageSend', this.handleSendMessage);
+        this.props.socket.on('messageSend', this.handleMessageSend);
         this.props.socket.on('userJoined', this.handleUserJoined);
+        this.props.socket.on('userLeft', this.handleUserLeft);
     }
 
-    handleSendMessage(message) {
+    handleMessageSend(message) {
         this.addMessage(message);
     }
 
@@ -32,6 +34,17 @@ class ChatBox extends React.Component {
         if (localStorage.getItem('username') !== username) {
             this.addMessage(message);
         }
+    }
+
+    handleUserLeft(username) {
+        let message = {
+            id: new Date().getTime(),
+            author: 'ChatBot',
+            created_at: new Date().toLocaleString(),
+            text: username + ' left the chat.'
+        };
+
+        this.addMessage(message);
     }
 
     addMessage(message) {
@@ -49,7 +62,7 @@ class ChatBox extends React.Component {
                 <SendBox
                     socket={this.props.socket}
                     username={this.props.username}
-                    onSendMessage={this.handleSendMessage}
+                    onSendMessage={this.handleMessageSend}
                 />
             </div>
         );

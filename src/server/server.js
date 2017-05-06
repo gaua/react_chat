@@ -20,10 +20,6 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
-app.get('/register', function (req, res) {
-    res.render('register');
-});
-
 io.on('connection', function(socket){
     socket.on('messageSend', function(msg){
         io.emit('messageSend', msg);
@@ -31,5 +27,9 @@ io.on('connection', function(socket){
 
     socket.on('userJoined', function (username) {
         io.emit('userJoined', username);
+    });
+
+    socket.on('userLeft', function (username) {
+        io.emit('userLeft', username);
     })
 });

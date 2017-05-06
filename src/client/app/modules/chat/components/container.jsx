@@ -26,7 +26,7 @@ class Container extends React.Component {
 
         return (
             <div className="container content">
-                <Header />
+                <Header socket={this.props.socket}/>
                 {content}
             </div>
         );
