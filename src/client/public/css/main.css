@@ -18,11 +18,27 @@
 }
 
 .message {
-    background-color: #5bc0de;
     border-radius: 10px;
+
+    clear: both;
 
     padding: 10px;
     margin-bottom: 3px;
+}
+
+.message.self {
+    background-color: #5bc0de;
+    float: right;
+}
+
+.message.else {
+    background-color: lightgrey;
+    float: left;
+}
+
+.message.bot {
+    background-color: chartreuse;
+    float: left;
 }
 
 .message .details {
@@ -42,6 +58,7 @@
     position: relative;
 
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .registration-box {

@@ -15,6 +15,7 @@ class MessagesBox extends React.Component {
             messages.push(
                 <Message
                     key={message.id}
+                    type={message.type}
                     author={message.author}
                     created_at={message.created_at}
                     text={message.text}

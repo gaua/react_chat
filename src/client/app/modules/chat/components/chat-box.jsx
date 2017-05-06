@@ -20,12 +20,19 @@ class ChatBox extends React.Component {
     }
 
     handleMessageSend(message) {
+        if (localStorage.getItem('username') !== message.author) {
+            message.type = 'else';
+        } else {
+            message.type = 'self'
+        }
+
         this.addMessage(message);
     }
 
     handleUserJoined(username) {
         let message = {
             id: new Date().getTime(),
+            type: 'bot',
             author: 'ChatBot',
             created_at: new Date().toLocaleString(),
             text: username + ' joined to the chat.'
@@ -39,6 +46,7 @@ class ChatBox extends React.Component {
     handleUserLeft(username) {
         let message = {
             id: new Date().getTime(),
+            type: 'bot',
             author: 'ChatBot',
             created_at: new Date().toLocaleString(),
             text: username + ' left the chat.'
