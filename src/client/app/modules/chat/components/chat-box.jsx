@@ -11,11 +11,30 @@ class ChatBox extends React.Component {
         };
 
         this.handleSendMessage = this.handleSendMessage.bind(this);
+        this.handleUserJoined = this.handleUserJoined.bind(this);
 
         this.props.socket.on('messageSend', this.handleSendMessage);
+        this.props.socket.on('userJoined', this.handleUserJoined);
     }
 
     handleSendMessage(message) {
+        this.addMessage(message);
+    }
+
+    handleUserJoined(username) {
+        let message = {
+            id: new Date().getTime(),
+            author: 'ChatBot',
+            created_at: new Date().toLocaleString(),
+            text: username + ' joined to the chat.'
+        };
+
+        if (localStorage.getItem('username') !== username) {
+            this.addMessage(message);
+        }
+    }
+
+    addMessage(message) {
         let messages = this.state.messages;
 
         messages.push(message);

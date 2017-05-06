@@ -19,6 +19,8 @@ class RegistrationBox extends React.Component {
     saveUsername() {
         localStorage.setItem('username', this.state.username);
 
+        this.props.socket.emit('userJoined', this.state.username);
+
         this.props.setUsername(this.state.username);
     }
 
