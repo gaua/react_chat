@@ -1,4 +1,6 @@
 import React from 'react';
+import Events from '../enums/events';
+import UserInfo from '../enums/user-info';
 
 class RegistrationBox extends React.Component {
     constructor(props) {
@@ -8,18 +10,18 @@ class RegistrationBox extends React.Component {
             username: ''
         };
 
-        this.handleUsernameFieldChange = this.handleUsernameFieldChange.bind(this);
+        this.usernameFieldChange = this.usernameFieldChange.bind(this);
         this.saveUsername = this.saveUsername.bind(this);
     }
 
-    handleUsernameFieldChange(event) {
+    usernameFieldChange(event) {
         this.setState({username: event.target.value});
     }
 
     saveUsername() {
-        localStorage.setItem('username', this.state.username);
+        localStorage.setItem(UserInfo.USERNAME, this.state.username);
 
-        this.props.socket.emit('userJoined', this.state.username);
+        this.props.socket.emit(Events.USER_JOINED, this.state.username);
 
         this.props.setUsername(this.state.username);
     }
@@ -33,7 +35,7 @@ class RegistrationBox extends React.Component {
                         className="form-control"
                         placeholder="type your username..."
                         value={this.state.username}
-                        onChange={this.handleUsernameFieldChange}
+                        onChange={this.usernameFieldChange}
                     />
                     <span className="input-group-btn">
                     <button

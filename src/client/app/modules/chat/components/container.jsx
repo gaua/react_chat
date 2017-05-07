@@ -19,15 +19,16 @@ class Container extends React.Component {
     }
 
     render() {
+        let socket = this.props.socket;
         let username = this.state.username || localStorage.getItem('username');
-        let content = username ?
-            <ChatBox socket={this.props.socket} username={username} /> :
-            <RegistrationBox socket={this.props.socket} setUsername={this.setUsername} />;
+        let box = username ?
+            <ChatBox socket={socket} username={username} /> :
+            <RegistrationBox socket={socket} setUsername={this.setUsername} />;
 
         return (
             <div className="container content">
-                <Header socket={this.props.socket}/>
-                {content}
+                <Header socket={socket}/>
+                {box}
             </div>
         );
     }

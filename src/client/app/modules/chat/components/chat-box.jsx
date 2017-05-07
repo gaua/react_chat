@@ -1,26 +1,28 @@
 import React from 'react';
 import SendBox from './send-box';
 import MessagesBox from './messages-box';
+import Events from '../enums/events';
+import UserInfo from '../enums/user-info';
 
 class ChatBox extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            messages: JSON.parse(localStorage.getItem('messages')) || []
+            messages: JSON.parse(localStorage.getItem(UserInfo.MESSAGES)) || []
         };
 
-        this.handleMessageSend = this.handleMessageSend.bind(this);
-        this.handleUserJoined = this.handleUserJoined.bind(this);
-        this.handleUserLeft = this.handleUserLeft.bind(this);
+        this.messageSend = this.messageSend.bind(this);
+        this.userJoined = this.userJoined.bind(this);
+        this.userLeft = this.userLeft.bind(this);
 
-        this.props.socket.on('messageSend', this.handleMessageSend);
-        this.props.socket.on('userJoined', this.handleUserJoined);
-        this.props.socket.on('userLeft', this.handleUserLeft);
+        this.props.socket.on(Events.MESSAGE_SEND, this.messageSend);
+        this.props.socket.on(Events.USER_JOINED, this.userJoined);
+        this.props.socket.on(Events.USER_LEFT, this.userLeft);
     }
 
-    handleMessageSend(message) {
-        if (localStorage.getItem('username') !== message.author) {
+    messageSend(message) {
+        if (localStorage.getItem(UserInfo.USERNAME) !== message.author) {
             message.type = 'else';
         } else {
             message.type = 'self'
@@ -29,7 +31,7 @@ class ChatBox extends React.Component {
         this.addMessage(message);
     }
 
-    handleUserJoined(username) {
+    userJoined(username) {
         let message = {
             id: new Date().getTime(),
             type: 'bot',
@@ -41,7 +43,7 @@ class ChatBox extends React.Component {
         this.addMessage(message);
     }
 
-    handleUserLeft(username) {
+    userLeft(username) {
         let message = {
             id: new Date().getTime(),
             type: 'bot',
@@ -58,7 +60,7 @@ class ChatBox extends React.Component {
 
         messages.push(message);
 
-        localStorage.setItem('messages', JSON.stringify(messages));
+        localStorage.setItem(UserInfo.MESSAGES, JSON.stringify(messages));
 
         this.setState({messages: messages});
     }
@@ -70,7 +72,7 @@ class ChatBox extends React.Component {
                 <SendBox
                     socket={this.props.socket}
                     username={this.props.username}
-                    onSendMessage={this.handleMessageSend}
+                    onSendMessage={this.messageSend}
                 />
             </div>
         );

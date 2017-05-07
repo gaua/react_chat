@@ -1,5 +1,5 @@
 import React from 'react';
-import KeyCodes from '../enums/key-codes'
+import KeyCodes from '../enums/keys'
 
 class SendBox extends React.Component {
     constructor(props) {

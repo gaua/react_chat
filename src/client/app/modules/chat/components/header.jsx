@@ -1,4 +1,6 @@
 import React from 'react';
+import UserInfo from '../enums/user-info';
+import Events from '../enums/events';
 
 class Header extends React.Component {
     constructor(props) {
@@ -8,17 +10,17 @@ class Header extends React.Component {
     }
 
     leaveChat() {
-        let username = localStorage.getItem('username');
+        let username = localStorage.getItem(UserInfo.USERNAME);
 
-        this.props.socket.emit('userLeft', username);
+        this.props.socket.emit(Events.USER_LEFT, username);
 
-        localStorage.removeItem('username');
+        localStorage.removeItem(UserInfo.USERNAME);
 
         location.reload();
     }
 
     render() {
-        let username = localStorage.getItem('username');
+        let username = localStorage.getItem(UserInfo.USERNAME);
         let leave = username ?
             <li role="presentation"><a href="#" onClick={this.leaveChat}>Leave</a></li> :
             null;
