@@ -1,6 +1,7 @@
 const UserInfo = {
     USERNAME: 'username',
-    MESSAGES: 'messages'
+    MESSAGES: 'messages',
+    CHAT_BOT: 'ChatBot'
 };
 
 export default UserInfo;

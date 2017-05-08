@@ -22,12 +22,6 @@ class ChatBox extends React.Component {
     }
 
     messageSend(message) {
-        if (localStorage.getItem(UserInfo.USERNAME) !== message.author) {
-            message.type = 'else';
-        } else {
-            message.type = 'self'
-        }
-
         this.addMessage(message);
     }
 
