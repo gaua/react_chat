@@ -26,10 +26,10 @@ io.on('connection', function(socket){
     });
 
     socket.on('userJoined', function (username) {
-        io.emit('userJoined', username);
+        socket.broadcast.emit('userJoined', username);
     });
 
     socket.on('userLeft', function (username) {
-        io.emit('userLeft', username);
+        socket.broadcast.emit('userLeft', username);
     })
 });
